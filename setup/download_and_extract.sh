@@ -13,5 +13,5 @@ fi
 
 echo "Extracting ${tarball}..."
 mkdir ${dest}
-tar -zxf ${NGINX_SETUP_DIR}/sources/${tarball} --strip=1 -C ${dest}
+tar -zxf ${NGINX_SETUP_DIR}/sources/${tarball} --no-same-owner --strip=1 -C ${dest}
 rm -rf ${NGINX_SETUP_DIR}/sources/${tarball}
