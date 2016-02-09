@@ -1,5 +1,5 @@
 #docker build -t atyenoria/openresty-base . && docker run -it atyenoria/openresty-base bash
-FROM debian:wheezy
+FROM debian:jessie
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
