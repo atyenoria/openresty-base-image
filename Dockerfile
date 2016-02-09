@@ -55,6 +55,7 @@ RUN cd /root \
     --with-stream_ssl_module \
     --with-http_ssl_module \
     --without-http_ssi_module \
+    --with-http_gzip_static_module \
     --without-http_userid_module \
     --without-http_uwsgi_module \
     --without-http_scgi_module \
