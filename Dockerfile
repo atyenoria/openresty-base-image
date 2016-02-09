@@ -7,8 +7,9 @@ RUN apt-get update \
     libreadline-dev libncurses5-dev libpcre3-dev libssl-dev ca-certificates\
  && rm -rf /var/lib/apt/lists/*
 
+#delete v!!
 ENV OPENRESTY_VERSION 1.9.7.3
-ENV NPS_VERSION=v1.9.32.10
+ENV NPS_VERSION=1.9.32.10
 ENV NGINX_UP_CHECK=0.3.0
 
 ENV NGX_PAGESPEED_DOWNLOAD_URL="https://github.com/pagespeed/ngx_pagespeed/archive/v${NPS_VERSION}-beta.tar.gz" \
