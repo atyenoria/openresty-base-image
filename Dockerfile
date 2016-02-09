@@ -8,7 +8,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 ENV OPENRESTY_VERSION 1.9.7.3
-ENV NPS_VERSION=1.9.32.4
+ENV NPS_VERSION=v1.9.32.10
 ENV NGINX_UP_CHECK=0.3.0
 
 ENV NGX_PAGESPEED_DOWNLOAD_URL="https://github.com/pagespeed/ngx_pagespeed/archive/v${NPS_VERSION}-beta.tar.gz" \
@@ -22,8 +22,8 @@ ENV NGINX_SETUP_DIR=/var/cache/nginx
 ENV TEMP_PACKAGES="build-essential"
 
 COPY setup/ ${NGINX_SETUP_DIR}/
-# RUN bash ${NGINX_SETUP_DIR}/download_and_extract.sh "${NGX_PAGESPEED_DOWNLOAD_URL}" "${NGINX_SETUP_DIR}/ngx_pagespeed"
-# RUN bash ${NGINX_SETUP_DIR}/download_and_extract.sh "${PSOL_DOWNLOAD_URL}" "${NGINX_SETUP_DIR}/ngx_pagespeed/psol"
+RUN bash ${NGINX_SETUP_DIR}/download_and_extract.sh "${NGX_PAGESPEED_DOWNLOAD_URL}" "${NGINX_SETUP_DIR}/ngx_pagespeed"
+RUN bash ${NGINX_SETUP_DIR}/download_and_extract.sh "${PSOL_DOWNLOAD_URL}" "${NGINX_SETUP_DIR}/ngx_pagespeed/psol"
 RUN bash ${NGINX_SETUP_DIR}/download_and_extract.sh "${NGINX_UP_CHECK_URL}" "${NGINX_SETUP_DIR}/nginx_upstream_check_module"
 
 # NginX prefix is automatically set by OpenResty to $OPENRESTY_PREFIX/nginx
