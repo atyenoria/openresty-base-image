@@ -11,6 +11,7 @@ machine:
 test:
   override:
     - docker build -t atyenoria/$IMAGE_NAME .
+    - ls
 
 
 deployment:
