@@ -22,8 +22,8 @@ ENV NGINX_SETUP_DIR=/var/cache/nginx
 ENV TEMP_PACKAGES="build-essential"
 
 COPY setup/ ${NGINX_SETUP_DIR}/
-RUN bash ${NGINX_SETUP_DIR}/download_and_extract.sh "${NGX_PAGESPEED_DOWNLOAD_URL}" "${NGINX_SETUP_DIR}/ngx_pagespeed"
-RUN bash ${NGINX_SETUP_DIR}/download_and_extract.sh "${PSOL_DOWNLOAD_URL}" "${NGINX_SETUP_DIR}/ngx_pagespeed/psol"
+# RUN bash ${NGINX_SETUP_DIR}/download_and_extract.sh "${NGX_PAGESPEED_DOWNLOAD_URL}" "${NGINX_SETUP_DIR}/ngx_pagespeed"
+# RUN bash ${NGINX_SETUP_DIR}/download_and_extract.sh "${PSOL_DOWNLOAD_URL}" "${NGINX_SETUP_DIR}/ngx_pagespeed/psol"
 RUN bash ${NGINX_SETUP_DIR}/download_and_extract.sh "${NGINX_UP_CHECK_URL}" "${NGINX_SETUP_DIR}/nginx_upstream_check_module"
 
 # NginX prefix is automatically set by OpenResty to $OPENRESTY_PREFIX/nginx
@@ -71,14 +71,14 @@ RUN cd /root \
 
 
 #clean up
-RUN apt-get remove --purge -y ${TEMP_PACKAGES} && \
-    apt-get autoremove -y && \
-    apt-get clean && \
-    apt-get autoclean && \
-    echo -n > /var/lib/apt/extended_states && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /usr/share/man/?? && \
-    rm -rf /usr/share/man/??_*
+# RUN apt-get remove --purge -y ${TEMP_PACKAGES} && \
+#     apt-get autoremove -y && \
+#     apt-get clean && \
+#     apt-get autoclean && \
+#     echo -n > /var/lib/apt/extended_states && \
+#     rm -rf /var/lib/apt/lists/* && \
+#     rm -rf /usr/share/man/?? && \
+#     rm -rf /usr/share/man/??_*
 
 
 WORKDIR $NGINX_PREFIX/
