@@ -1,6 +1,7 @@
 #docker build -t atyenoria/openresty-base . && docker run -it atyenoria/openresty-base bash
 FROM debian:jessie
 
+#openresty
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     curl perl lsof wget make build-essential procps unzip \
@@ -94,6 +95,28 @@ RUN wget https://github.com/keplerproject/luarocks/archive/v${VER_LUAROCKS}-rc2.
 RUN tar -xzvf v${VER_LUAROCKS}-rc2.tar.gz && rm v${VER_LUAROCKS}-rc2.tar.gz
 RUN cd luarocks-${VER_LUAROCKS}-rc2 && ./configure --prefix=/opt/openresty/luajit --lua-suffix=jit --with-lua=/opt/openresty/luajit --with-lua-include=/opt/openresty/luajit/include/luajit-2.1 --with-lua-lib=/opt/openresty/luajit/lib && make build && make install && ls
 RUN echo "PATH=/opt/openresty/luajit/bin/:\$PATH" >> ~/.bashrc
+
+
+RUN /opt/openresty/luajit/bin/luarocks install lua-cjson
+RUN /opt/openresty/luajit/bin/luarocks install md5
+
+
+RUN mkdir -p /opt/openresty/nginx/logs
+RUN touch /opt/openresty/nginx/logs/nginx.pid
+RUN echo "alias ngx=\"nginx -c /etc/nginx/nginx.conf\"" >> ~/.bashrc
+RUN echo "alias lso=\"lsof -i -n -P\"" >> ~/.bashrc
+RUN echo "alias ls=\"ls --color\"" >> ~/.bashrc
+RUN echo "alias l=\"ls -la\"" >> ~/.bashrc
+
+# COPY ./test /opt/openresty/nginx
+
+
+
+# nginx -c /etc/nginx/nginx.conf
+RUN echo "cd /opt/openresty/nginx/test" >> ~/.bashrc
+RUN echo "alias r=\"resty\"" >> ~/.bashrc
+RUN echo "alias ng=\"nginx -p /opt/openresty/nginx/test -c\"" >> ~/.bashrc
+
 
 # ONBUILD RUN rm -rf conf/* html/*
 # ONBUILD COPY nginx $NGINX_PREFIX/
